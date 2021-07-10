@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Espace Admin";
+    if (Session["userID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<h2>Catalogue de Produits</h2>
+
+<hr />
+
+@foreach(var data in ViewBag.listeCategorie)
+{
+   
+    <div class="row col-xs-12">
+        <div style="background-color:#CCCCCC; font-size:16px; color:#000000">
+            @data.LIBELLE_CATEGORIE
+        </div>
+        @foreach(var produit in data.CAT_PRODUIT)
+        {
+            <div class="col-xs-12 col-sm-3">
+                <div>@produit.LIBELLE_PRODUIT</div>
+                <div><img src="@produit.URL_IMAGE_PRODUIT/@produit.IMAGE_PRODUIT" width="100" height="80" /></div>
+                <div>@produit.DESCRIPTION_PRODUIT</div>
+                <div><a href="" class="btn btn-warning">voir details</a></div>
+            </div>
+        }
+    </div>
+    <hr />
+}
+

@@ -1,0 +1,87 @@
+﻿@model projetCatalogueProduit.Models.CAT_PRODUIT
+@{
+    ViewBag.Title = "AjoutProduit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AjoutProduit</h2>
+
+
+
+<div>
+
+    <form id="formProduit" name="formProduit" action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @if (Model != null)
+            {
+                <input type="hidden" name="CODE_PRODUIT" id="CODE_PRODUIT" value="@Model.CODE_PRODUIT" />
+            }
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label>CATEGORIE</label>
+                    <select id="CODE_CATEGORIE" name="CODE_CATEGORIE" class="form-control">
+                        @foreach (var data in ViewBag.listeCategorie)
+                        {
+                            <option value="@data.CODE_CATEGORIE" @(Model!=null? Model.CODE_CATEGORIE==@data.CODE_CATEGORIE? "selected" : "" :"" )>@data.LIBELLE_CATEGORIE</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>PRODUIT *</label>
+                    <input type="text" id="LIBELLE_PRODUIT" name="LIBELLE_PRODUIT" class="form-control" value="@(Model!=null? Model.LIBELLE_PRODUIT : "")" required />
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label>DESCRIPTION</label>
+                    <textarea id="DESCRIPTION_PRODUIT" name="DESCRIPTION_PRODUIT" class="form-control">@(Model!=null? Model.DESCRIPTION_PRODUIT : "")</textarea>
+                </div>
+                <div class="form-group">
+                    <label>IMAGE PRODUIT</label>
+                    <input type="file" id="IMAGE_PRODUIT" name="IMAGE_PRODUIT" class="form-control" />
+                </div>
+            </div>
+
+        </div>
+       
+        <div class="row">
+            @if (Model == null)
+            {
+                <input type="submit" id="enregistrer" name="enregistrer" value="Enregistrer" class="btn btn-primary" />
+            }
+            else
+            {
+                <input type="submit" id="modifier" name="modifier" value="Enregistrer Modification" class="btn btn-success" />
+                <a href="~/Produit/AjoutProduit" class="btn btn-default">Annuler</a>
+            }
+        </div>
+    </form>
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>PRODUIT</th>
+                <th>DESCRIPTION</th>
+                <th>IMAGE</th>
+                <th>CATEGORIE</th>
+                <th>DATE SAISIE</th>
+            </tr>
+            @foreach (var data in ViewBag.listeProduit)
+            {
+                <tr>
+                    <td>@data.LIBELLE_PRODUIT</td>
+                    <td>@data.DESCRIPTION_PRODUIT</td>
+                    <td><img src="@data.URL_IMAGE_PRODUIT/@data.IMAGE_PRODUIT" width="100" height="80" /></td>
+                    <td>@data.CAT_CATEGORIE.LIBELLE_CATEGORIE</td>
+                    <td>@data.DATE_SAISIE</td>
+                    <td><a href="~/Produit/ModifierProduit/@data.CODE_PRODUIT" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Modifier</a></td>
+                    <td><a href="~/Produit/SupprimerProduit/@data.CODE_PRODUIT" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

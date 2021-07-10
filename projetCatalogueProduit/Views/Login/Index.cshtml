@@ -1,0 +1,74 @@
+﻿@model projetCatalogueProduit.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login Page</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        #login-div {
+            position: absolute;
+            left: 38%;
+            top: 28%;
+            border: 1px solid #ccc;
+            padding: 10px 10px;
+        }
+    </style>
+</head>
+<body style="background-color : #E8E8E8 ;">
+    <div id="login-div">
+        @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+        {
+            <table class="table">
+                <tr>
+                    <td></td>
+                    <td style="font-weight: bold;">Se Connecter</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.UserName)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.UserName)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.UserName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.Password)</td>
+                    <td>@Html.EditorFor(model => model.Password)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.Password)</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+
+        }
+        <p class="mt-5 mb-3 text-muted">&copy; MESKINI Mohamed Saad &amp; AMMOR Yazid</p>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+</body>
+</html>

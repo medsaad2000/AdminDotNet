@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BD_CATALOGUE_PRODUITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAT_CATEGORIE">
+          <Key>
+            <PropertyRef Name="CODE_CATEGORIE" />
+          </Key>
+          <Property Name="CODE_CATEGORIE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LIBELLE_CATEGORIE" Type="nvarchar(max)" />
+          <Property Name="DATE_SAISIE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CAT_PRODUIT">
+          <Key>
+            <PropertyRef Name="CODE_PRODUIT" />
+          </Key>
+          <Property Name="CODE_PRODUIT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_CATEGORIE" Type="int" />
+          <Property Name="LIBELLE_PRODUIT" Type="nvarchar" MaxLength="200" />
+          <Property Name="DESCRIPTION_PRODUIT" Type="nvarchar(max)" />
+          <Property Name="IMAGE_PRODUIT" Type="nvarchar(max)" />
+          <Property Name="URL_IMAGE_PRODUIT" Type="nvarchar(max)" />
+          <Property Name="DATE_SAISIE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_CAT_PRODUIT_CAT_PRODUIT">
+          <End Role="CAT_CATEGORIE" Type="Self.CAT_CATEGORIE" Multiplicity="0..1" />
+          <End Role="CAT_PRODUIT" Type="Self.CAT_PRODUIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_CATEGORIE">
+              <PropertyRef Name="CODE_CATEGORIE" />
+            </Principal>
+            <Dependent Role="CAT_PRODUIT">
+              <PropertyRef Name="CODE_CATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_CATALOGUE_PRODUITModelStoreContainer">
+          <EntitySet Name="CAT_CATEGORIE" EntityType="Self.CAT_CATEGORIE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAT_PRODUIT" EntityType="Self.CAT_PRODUIT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CAT_PRODUIT_CAT_PRODUIT" Association="Self.FK_CAT_PRODUIT_CAT_PRODUIT">
+            <End Role="CAT_CATEGORIE" EntitySet="CAT_CATEGORIE" />
+            <End Role="CAT_PRODUIT" EntitySet="CAT_PRODUIT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_CATALOGUE_PRODUITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CAT_CATEGORIE">
+          <Key>
+            <PropertyRef Name="CODE_CATEGORIE" />
+          </Key>
+          <Property Name="CODE_CATEGORIE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LIBELLE_CATEGORIE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_SAISIE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CAT_PRODUIT" Relationship="Self.FK_CAT_PRODUIT_CAT_PRODUIT" FromRole="CAT_CATEGORIE" ToRole="CAT_PRODUIT" />
+        </EntityType>
+        <EntityType Name="CAT_PRODUIT">
+          <Key>
+            <PropertyRef Name="CODE_PRODUIT" />
+          </Key>
+          <Property Name="CODE_PRODUIT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_CATEGORIE" Type="Int32" />
+          <Property Name="LIBELLE_PRODUIT" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION_PRODUIT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE_PRODUIT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="URL_IMAGE_PRODUIT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_SAISIE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CAT_CATEGORIE" Relationship="Self.FK_CAT_PRODUIT_CAT_PRODUIT" FromRole="CAT_PRODUIT" ToRole="CAT_CATEGORIE" />
+        </EntityType>
+        <Association Name="FK_CAT_PRODUIT_CAT_PRODUIT">
+          <End Role="CAT_CATEGORIE" Type="Self.CAT_CATEGORIE" Multiplicity="0..1" />
+          <End Role="CAT_PRODUIT" Type="Self.CAT_PRODUIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_CATEGORIE">
+              <PropertyRef Name="CODE_CATEGORIE" />
+            </Principal>
+            <Dependent Role="CAT_PRODUIT">
+              <PropertyRef Name="CODE_CATEGORIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CATALOGUE_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAT_CATEGORIE" EntityType="Self.CAT_CATEGORIE" />
+          <EntitySet Name="CAT_PRODUIT" EntityType="Self.CAT_PRODUIT" />
+          <AssociationSet Name="FK_CAT_PRODUIT_CAT_PRODUIT" Association="Self.FK_CAT_PRODUIT_CAT_PRODUIT">
+            <End Role="CAT_CATEGORIE" EntitySet="CAT_CATEGORIE" />
+            <End Role="CAT_PRODUIT" EntitySet="CAT_PRODUIT" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="BD_CATALOGUE_PRODUITModel.User" />
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_CATALOGUE_PRODUITModelStoreContainer" CdmEntityContainer="CATALOGUE_Entities">
+          <EntitySetMapping Name="CAT_CATEGORIE">
+            <EntityTypeMapping TypeName="BD_CATALOGUE_PRODUITModel.CAT_CATEGORIE">
+              <MappingFragment StoreEntitySet="CAT_CATEGORIE">
+                <ScalarProperty Name="CODE_CATEGORIE" ColumnName="CODE_CATEGORIE" />
+                <ScalarProperty Name="LIBELLE_CATEGORIE" ColumnName="LIBELLE_CATEGORIE" />
+                <ScalarProperty Name="DATE_SAISIE" ColumnName="DATE_SAISIE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAT_PRODUIT">
+            <EntityTypeMapping TypeName="BD_CATALOGUE_PRODUITModel.CAT_PRODUIT">
+              <MappingFragment StoreEntitySet="CAT_PRODUIT">
+                <ScalarProperty Name="CODE_PRODUIT" ColumnName="CODE_PRODUIT" />
+                <ScalarProperty Name="CODE_CATEGORIE" ColumnName="CODE_CATEGORIE" />
+                <ScalarProperty Name="LIBELLE_PRODUIT" ColumnName="LIBELLE_PRODUIT" />
+                <ScalarProperty Name="DESCRIPTION_PRODUIT" ColumnName="DESCRIPTION_PRODUIT" />
+                <ScalarProperty Name="IMAGE_PRODUIT" ColumnName="IMAGE_PRODUIT" />
+                <ScalarProperty Name="URL_IMAGE_PRODUIT" ColumnName="URL_IMAGE_PRODUIT" />
+                <ScalarProperty Name="DATE_SAISIE" ColumnName="DATE_SAISIE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="BD_CATALOGUE_PRODUITModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

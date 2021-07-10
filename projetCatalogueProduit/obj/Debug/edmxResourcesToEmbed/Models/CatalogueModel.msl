@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_CATALOGUE_PRODUITModelStoreContainer" CdmEntityContainer="CATALOGUE_Entities">
+    <EntitySetMapping Name="CAT_CATEGORIE">
+      <EntityTypeMapping TypeName="BD_CATALOGUE_PRODUITModel.CAT_CATEGORIE">
+        <MappingFragment StoreEntitySet="CAT_CATEGORIE">
+          <ScalarProperty Name="CODE_CATEGORIE" ColumnName="CODE_CATEGORIE" />
+          <ScalarProperty Name="LIBELLE_CATEGORIE" ColumnName="LIBELLE_CATEGORIE" />
+          <ScalarProperty Name="DATE_SAISIE" ColumnName="DATE_SAISIE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAT_PRODUIT">
+      <EntityTypeMapping TypeName="BD_CATALOGUE_PRODUITModel.CAT_PRODUIT">
+        <MappingFragment StoreEntitySet="CAT_PRODUIT">
+          <ScalarProperty Name="CODE_PRODUIT" ColumnName="CODE_PRODUIT" />
+          <ScalarProperty Name="CODE_CATEGORIE" ColumnName="CODE_CATEGORIE" />
+          <ScalarProperty Name="LIBELLE_PRODUIT" ColumnName="LIBELLE_PRODUIT" />
+          <ScalarProperty Name="DESCRIPTION_PRODUIT" ColumnName="DESCRIPTION_PRODUIT" />
+          <ScalarProperty Name="IMAGE_PRODUIT" ColumnName="IMAGE_PRODUIT" />
+          <ScalarProperty Name="URL_IMAGE_PRODUIT" ColumnName="URL_IMAGE_PRODUIT" />
+          <ScalarProperty Name="DATE_SAISIE" ColumnName="DATE_SAISIE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="BD_CATALOGUE_PRODUITModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

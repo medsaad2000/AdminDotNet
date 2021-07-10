@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_CATALOGUE_PRODUITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CAT_CATEGORIE">
+    <Key>
+      <PropertyRef Name="CODE_CATEGORIE" />
+    </Key>
+    <Property Name="CODE_CATEGORIE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LIBELLE_CATEGORIE" Type="nvarchar(max)" />
+    <Property Name="DATE_SAISIE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CAT_PRODUIT">
+    <Key>
+      <PropertyRef Name="CODE_PRODUIT" />
+    </Key>
+    <Property Name="CODE_PRODUIT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CODE_CATEGORIE" Type="int" />
+    <Property Name="LIBELLE_PRODUIT" Type="nvarchar" MaxLength="200" />
+    <Property Name="DESCRIPTION_PRODUIT" Type="nvarchar(max)" />
+    <Property Name="IMAGE_PRODUIT" Type="nvarchar(max)" />
+    <Property Name="URL_IMAGE_PRODUIT" Type="nvarchar(max)" />
+    <Property Name="DATE_SAISIE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_CAT_PRODUIT_CAT_PRODUIT">
+    <End Role="CAT_CATEGORIE" Type="Self.CAT_CATEGORIE" Multiplicity="0..1" />
+    <End Role="CAT_PRODUIT" Type="Self.CAT_PRODUIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_CATEGORIE">
+        <PropertyRef Name="CODE_CATEGORIE" />
+      </Principal>
+      <Dependent Role="CAT_PRODUIT">
+        <PropertyRef Name="CODE_CATEGORIE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_CATALOGUE_PRODUITModelStoreContainer">
+    <EntitySet Name="CAT_CATEGORIE" EntityType="Self.CAT_CATEGORIE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_PRODUIT" EntityType="Self.CAT_PRODUIT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CAT_PRODUIT_CAT_PRODUIT" Association="Self.FK_CAT_PRODUIT_CAT_PRODUIT">
+      <End Role="CAT_CATEGORIE" EntitySet="CAT_CATEGORIE" />
+      <End Role="CAT_PRODUIT" EntitySet="CAT_PRODUIT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
